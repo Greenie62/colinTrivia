@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+    /*All of the visual/color/space on the page assignments, got a classmate whose specialized in this language(CSS) for 14 yrs
+    // i look forward to sifting thru his code afterwards, his HW's certainly have the visual flair! lol */
+
+        *{background-color:#ebebeb;
+          box-sizing:border-box;}
+
+
+        header{text-align:center;
+               color:olivedrab;
+               letter-spacing:20px;
+               font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+               text-shadow:2px 1px tomato;}
+        #gameSpace{height:500px;
+              width:500px;
+              background-color:teal;
+              color:white;
+              margin-left: 25%;
+              border-radius:5%;
+              margin-right: 25%;}
+        #startGame {position:relative;
+                   top:225px;
+                   left:215px;
+                   font-size:18px;
+                    height:65px;
+                    border-radius:3%;
+                    width:85px;}
+
+        
+
+        button:hover{background-color:olivedrab;
+                color:#777;}
+
+        img{height:270px;}
+
+        .triviaPanel {
+            height:500px;
+            width:500px;
+            background-color:darkgray;
+            text-align:center;
+            color:orangered;
+        }
+
+        .gameOver{
+            height:500px;
+            width:500px;
+            background-color:darkgray;
+            text-align:center;
+            color:orangered;
+        }
+
+        .nextTwo .nextThree .nextFour .nextFive
+                 {position:relative;
+                 bottom:100px;
+                 left:50px;}
+        
+        .quiz .quizTwo .quizThree .quizFour .quizFive{margin-left:20px;
+              font-weight:bolder;}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--THE basic HTML skeleton. A text header and an allocated space where all the other stuff comes AFTER the page is loaded
+     <h1> is the tag for largest size font, h for header, p for paragraph, unlike medicines, at least the million n 1 pieces on pr
+         programming TEND to have sensible names -->
+    
+    <header><h1>Get da Hay outta he!!</h1></header>
+
+    <div id='gameSpace'>
+        <button id='startGame'>get to da button!!!</button>
+    </div>
+
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script>
+
+        /*this is where the magic/fun/frustration/logic occurs. Welcome to javascript!!
+        first we declare some necessary ingredients/variables needed. The pics stashed in array most obvious
+        the x-ed out code underneath was a dry-run slideshow thing to see A)all the pics would render and B)
+        good warm-up to the warm-up of what im sending you. ++ was is computer lingo for up-one interval. Basically 
+        telling the computer to start with first picture in the array/pic thingy and go up one each time, which shows the next
+        pic obviously, and then a condition to reset the counter once its reached the picture lengh so it doesnt just show blank/fuck
+        up screen. basically it starts over/loops. */
+
+        var pics=["commando.jpg","Die_hard.jpeg","doubleimpact.png",'ghostbusters.jpg',"RunningMan.jpg","shawshank.jpg"];
+        var currentImage;
+        var counter=0;
+        /*
+        function showImage(){
+            $("#gameSpace").empty();
+            $("#gameSpace").html("<img src=" + pics[counter] + ">");
+        };
+
+        function nextImage(){
+            counter++;
+            $("#gameSpace").html("<h1>Loading Next Pic! </h1>");
+            setTimeout(showImage,1000);
+            if(counter === pics.length){
+                counter=0;
+            }
+        }
+
+         function playShow(){
+             currentImage=setInterval(nextImage,3000);
+         }
+
+         $("#startGame").on("click",function(){
+             playShow();
+         }) */
+
+         var right=0;
+         var wrong=0;
+         /* the quiz I'll be referring back to in, ultimately messy code, its a wash-rinse repeat procedure so no reason I couldnt have made it 
+         ALOT shorter. And there in lies a major measurement of what seperates the good programmers from the bad. Efficiency, efficiency efficiency!!
+         But for now, we're mainly just concerned with operational-ish! lol */
+         var quiz=[{
+             pic:pics[0],
+             question:"Let off some steam...",
+             answers:["hotshot","ace","bennett","pothead"],
+             right:"bennett"
+             
+         },
+        {
+             pic:pics[1],
+             question:"Now I have a machine gun...",
+             answers:["motherfucker","now what??","ha ha ha","ho ho ho"],
+             right:"ho ho ho",
+        },
+    {
+             pic:pics[2],
+             question:"Mr",
+             answers:["do you have any change?","what time is it","silkunderwear","rogers"],
+             right:"silkunderwear",
+    },
+{
+            pic:pics[3],
+            question:"State..",
+            answers:["Empire","taxes","puff marshmallow man","of grace"],
+            right:"puff marshmallow man",
+},
+{
+            pic:pics[4],
+            question:"had the host from this famous tv show",
+            answers:['jeopardy','american gladiators','family feud','You cant say that on television'],
+            right:"family feud",
+},
+{
+             pic:pics[5],
+             question:"I heard your someone to go to when someone needs favors, what was the favor?",
+             answers:["kill someone","get cigarettes","a rockhammer","basic supplies"],
+             right:"a rockhammer",
+}];
+
+/* the code!!! basically creating HTML elements on the fly and assigning them placement/values/text...thats all I'll make you
+suffer thru!! Now, GET DA HAY OUTTA HE!! */
+
+       $("#startGame").on("click",function(){
+           $("#gameSpace").empty();
+           var picDiv=$("<div>");
+            var next=$("<button>");
+             next.addClass("nextTwo")
+             next.html("<h4> NEXT </h4>")
+            picDiv.addClass("triviaPanel")
+            picDiv.append("<img src=" + quiz[0].pic + ">");
+            picDiv.append("<h2>" + quiz[0].question + "</h2>");
+            for(var i=0;i<quiz[0].answers.length;i++){
+            picDiv.append("<input type='radio' name='questOne' value='" + quiz[0].answers[i] + "'class='quiz'>",quiz[0].answers[i]);
+            };
+           $("#gameSpace").append(picDiv)
+           $("#gameSpace").append(next) 
+             $(".quiz").on('click',function(){
+                 var userPicked=$(this).val();
+                 
+             
+           
+       
+
+       next.on("click",function(){
+        $("#gameSpace").empty();
+           var picDivTwo=$("<div>");
+            var nextTwo=$("<button>");
+             nextTwo.addClass("nextThree")
+             nextTwo.html("<h4> NEXT </h4>")
+            picDivTwo.addClass("triviaPanel")
+            picDivTwo.append("<img src=" + quiz[1].pic + ">");
+            picDivTwo.append("<h2>" + quiz[1].question + "</h2>");
+            for(var i=0;i<quiz[1].answers.length;i++){
+            picDivTwo.append("<input type='radio' name='questOne' value='" + quiz[1].answers[i] + "'class='quizTwo'>",quiz[1].answers[i]);
+            };
+           $("#gameSpace").append(picDivTwo)
+           $("#gameSpace").append(nextTwo) 
+             $(".quizTwo").on('click',function(){
+                 var userPickedTwo=$(this).val();
+              
+               
+
+
+
+        nextTwo.on("click",function(){
+            $("#gameSpace").empty();
+           var picDivThree=$("<div>");
+            var nextThree=$("<button>");
+             nextThree.addClass("nextFour")
+             nextThree.html("<h4> NEXT </h4>")
+            picDivThree.addClass("triviaPanel")
+            picDivThree.append("<img src=" + quiz[2].pic + ">");
+            picDivThree.append("<h2>" + quiz[2].question + "</h2>");
+            for(var i=0;i<quiz[2].answers.length;i++){
+            picDivThree.append("<input type='radio' name='questOne' value='" + quiz[2].answers[i] + "'class='quizThree'>",quiz[2].answers[i]);
+            };
+           $("#gameSpace").append(picDivThree)
+           $("#gameSpace").append(nextThree) 
+             $(".quizThree").on('click',function(){
+                 var userPickedThree=$(this).val();
+                
+
+        nextThree.on("click",function(){
+            $("#gameSpace").empty();
+           var picDivFour=$("<div>");
+            var nextFour=$("<button>");
+             nextFour.addClass("nextFour")
+             nextFour.html("<h4> NEXT </h4>")
+            picDivFour.addClass("triviaPanel")
+            picDivFour.append("<img src=" + quiz[3].pic + ">");
+            picDivFour.append("<h2>" + quiz[3].question + "</h2>");
+            for(var i=0;i<quiz[3].answers.length;i++){
+            picDivFour.append("<input type='radio' name='questOne' value='" + quiz[3].answers[i] + "'class='quizThree'>",quiz[3].answers[i]);
+            };
+           $("#gameSpace").append(picDivFour)
+           $("#gameSpace").append(nextFour) 
+             $(".quizThree").on('click',function(){
+                 var userPickedFour=$(this).val();
+               
+
+        nextFour.on("click",function(){
+            $("#gameSpace").empty();
+           var picDivFive=$("<div>");
+            var nextFive=$("<button>");
+             nextFive.addClass("nextFive")
+             nextFive.html("<h4> SEE UR SCORE! </h4>")
+            picDivFive.addClass("triviaPanel")
+            picDivFive.append("<img src=" + quiz[4].pic + ">");
+            picDivFive.append("<h2>" + quiz[4].question + "</h2>");
+            for(var i=0;i<quiz[4].answers.length;i++){
+            picDivFive.append("<input type='radio' name='questOne' value='" + quiz[4].answers[i] + "'class='quizFour'>",quiz[4].answers[i]);
+            };
+           $("#gameSpace").append(picDivFive)
+           $("#gameSpace").append(nextFive) 
+             $(".quizFour").on('click',function(){
+                 var userPickedFive=$(this).val();
+                 console.log(userPicked)
+                 console.log(userPickedTwo)
+                 console.log(userPickedThree);
+                 console.log(userPickedFour);
+                 console.log(userPickedFive);
+
+        if(userPicked === quiz[0].right){
+            right++;
+        }
+        else{wrong++}
+        if(userPickedTwo === quiz[1].right){
+            right++;
+        }
+        else{wrong++}
+        if(userPickedThree === quiz[2].right){
+            right++;
+        }
+        else{wrong++}
+        if(userPickedFour === quiz[3].right){
+            right++;
+        }
+        else{wrong++}
+        if(userPickedFive === quiz[4].right){
+            right++;
+        }
+        else{wrong++}
+
+          nextFive.on("click",function(){
+              $("#gameSpace").empty();
+            var gameOver=$("<div>");
+                gameOver.addClass('gameOver')
+                gameOver.append("<h2> Game Over </h2>")
+                gameOver.append("<h4>Right: " + right + "</h4>");
+                gameOver.append("<h4>Wrong: " + wrong + "</h4>");
+                $("#gameSpace").append(gameOver)
+                
+          })
+
+       
+       
+       })
+        })
+
+        })
+             })
+           
+
+       })
+    });
+});
+});
+});
+});
+    </script>
+    
+</body>
+</html>
